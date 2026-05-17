@@ -14,6 +14,8 @@ const {
   sendRefreshToken,
 } = require("../utils/token");
 
+// User Registration
+
 exports.signup = catchAsync(async (req, res, next) => {
   const { error, value } = registerUserSchema.validate(req.body, {
     abortEarly: false,
@@ -64,7 +66,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 });
 
-// Login
+// User Login
 
 exports.login = catchAsync(async (req, res, next) => {
   const { error, value } = loginUserSchema.validate(req.body, {
@@ -102,6 +104,7 @@ exports.login = catchAsync(async (req, res, next) => {
   });
 });
 
+// Refresh token generation
 exports.refreshAccessToken = catchAsync(async (req, res, next) => {
   const incomingRefreshToken =
     req.cookies.refreshToken || req.body.refreshToken;
