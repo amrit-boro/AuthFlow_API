@@ -2,12 +2,12 @@ const User = require("../models/userSchema");
 const AppError = require("../utils/appError");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
+const catchAsync = require("../utils/catchAsync");
 
 const {
   registerUserSchema,
   loginUserSchema,
 } = require("../validators/registerUserSchema");
-const catchAsync = require("../utils/catchAsync");
 const {
   createAccessToken,
   createRefreshToken,
@@ -31,7 +31,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     return next(new AppError("Email already exists!", 409));
   }
 
-  // Craete user
+  // Create user
   const newUser = await User.create(value);
 
   // 4. Generate the JWT for the new user
